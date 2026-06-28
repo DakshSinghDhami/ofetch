@@ -47,9 +47,6 @@ const textTypes = new Set([
   "application/xml",
   "application/xhtml",
   "application/html",
-  "application/rss+xml",
-  "application/atom+xml",
-  "application/xml-dtd",
 ]);
 
 const JSON_RE = /^application\/(?:[\w!#$%&*.^`~-]*\+)?json(;.+)?$/i;
@@ -78,7 +75,8 @@ export function detectResponseType(_contentType = ""): ResponseType {
     return "stream";
   }
 
-  if (textTypes.has(contentType) || contentType.startsWith("text/")) {
+  // Handle text/*, application/*+xml, and known text types
+  if (textTypes.has(contentType) || contentType.startsWith("text/") || /^application\/.+\+xml$/.test(contentType)) {
     return "text";
   }
 
