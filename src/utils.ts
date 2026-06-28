@@ -47,6 +47,7 @@ const textTypes = new Set([
   "application/xml",
   "application/xhtml",
   "application/html",
+  "application/rss+xml",
 ]);
 
 const JSON_RE = /^application\/(?:[\w!#$%&*.^`~-]*\+)?json(;.+)?$/i;
